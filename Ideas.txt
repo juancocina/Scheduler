@@ -1,0 +1,165 @@
+github token:
+
+So I know that I'm not good at scheduling my work
+I kinda suck at keeping at a schedule, but I know that it helps me be productive if I know what I have to do in the day.
+
+
+How can I make a website that would help me do that?
+
+What can I bring from my personal experience through school?
+What can I learn to make this idea a reality??
+
+Would it be easier to design the front or the back first?
+
+What are some things that I need to get done
+
+I need some back end material, using hug would definitely be useful, and I can learn some more python
+Possible webpage calls to the backend
+Database would most likely be SQL
+
+scheduler api (scheduler.py) //will store onto the database
+sms api		(sms.py)	//will send texts out to my phone - https://pypi.org/project/smsframework/
+				// had to install smsframework
+		// looking to work with Twilio for the text message notifications 
+		// looking to use to HUG in combination with this pythonsms.api
+
+				
+
+
+------------------------------- SCHEDULER API POSSIBLE FUNCITONS ------------------------------------------
+Login:
+	Useful for me to login to my scheduler, so that no one else can change my information
+
+addTask: (require
+	day
+	hour
+	minute
+	taskDescription
+	setReminder (should be a time)
+	setRepeat (should be once, or weekly) // this might be difficult logic to implement
+
+
+deleteTask:
+	removes information from a certain SQL query
+
+
+sendReminder:
+	send a call to the SMS.api to send me a text
+	//not sure how I'm going to get the reminders	
+	//it might be easier to have a seperate function for setReminder, rather than include it in addTask
+
+
+------------------------------ SMS API POSSIBLE FUNCTIONS --------------------------------------
+
+reminder:
+	sends message to my number with task description and time
+
+
+======
+Update from 1/19, approximately 5:47 pm...
+	I managed to send a text message to my phone number using Twilio in the pythonsms.py file.
+	This was my goal for today, it has been accomplished.
+	What now? What could be my next goal for the next hour or so???
+
+I should attempt to setup the database for the scheduler...
+Or at least think of how it can be done.
+
+======
+	
+
+======
+Update from 1/21, approximately 5:49 pm...
+One issue that i'm currently debating is, how much to I want to copy the project from my backend class
+I'm not sure if its necessary to do the whole logging thing, though I know its important for the long run of any 
+developed web app.
+
+Another thing is, how am I going to set up the database?
+
+- User Table
+username, password, email, phone_number
+
+^ That can be a simple way to have a table for users
+How do I do it so that then each user has their tasks?
+- Tasks Table
+username, task_description, set_reminder, setRepeat (should be once, or weekly), 
+
+If I do setRepeat as a string, and say 
+if (string == no) { don't repeat }
+else if ( string == weekly ) { repeat weekly }
+But I'm not sure how I would implement the logic in this case.
+It's surely a bit more complicated than just that, i'd assume...
+
+Then from here, it becomes a matter of WHEN DOES THE DAMN THING SEND THE TEXT???
+
+Well, we can figure that out after we have the database set up, can't we?
+
+
+Can you make a boolean value in sql??
+
+UPDATE AT ABOUT 8:52, same day
+
+I got both the tables for the database setup, I think the next move is trying to insert, delete, and/or modify data from the database
+inside the scheduler.py file
+
+Once I'm sure I can do that without any issues, then I can move onto sending texts
+
+======
+
+UPDATE from 1/22/2022 at approximate 10pm
+I got insertions working into the database, i've been adding users,
+Now I gotta work on adding tasks, that can be tomorrows workload
+Another thing I gotta do is reseach how I'm going to make the notifications send out
+I know I can use JSON to send some stuff over to pythonsms.py and extract using that
+
+So i'm thinking about having a function that checks every minute to see what needs to be delivered
+The only thing is that it ALWAYS has to be running??? So kind of a pain, but I think thats how it should work
+So
+As every minute passes, check the database,
+Which task needs to be notified?
+If yes, send that thang over 
+
+
+Should be easy right??
+
+======
+
+UPDATE from 1/25/2022
+So i'm thinking about how i'm going to get the messages sent out
+
+I can do either one of two ways
+1) check database every mintue
+2) set triggers for the day
+
+
+======
+Its been a while...
+UPDATE 2/12/2022
+I'm not exactly sure where to take this project now
+
+The basic idea was to have a front end, where I can input text, hit save (which will save to a DB)
+
+Then the backend, would scan the db, and at the time specified, send a text to my phone with the task description
+
+Whats something that i can do in the next thirty minutes that'll help me reach my goal??
+
+Make a simple script using the scheduler library that'll output something
+
+
+....
+
+I got something to print, every 2 minutes
+but how can i adapt this simple function into what I want????
+
+The next best step is to make this into a function that sends a text to my phone
+
+.... 
+
+I'm going to work on task insertion since I never finished that
+
+SUCCESSFULLY ADDED TO TASK TABLE
+
+======
+
+
+
+
