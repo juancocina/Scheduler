@@ -17,6 +17,7 @@ pip install httpie
 https://pypi.org/project/smsframework/
 
 This file will handle sending the text messages to my phone, using Twilio and Hug API Framework
+
 NOTE: This file is not uploaded to protect my twilio authorization codes
 
 # scheduler.py
