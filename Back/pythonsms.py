@@ -9,10 +9,11 @@ import hug
 import requests
 import json
 from datetime import datetime
+import keys
 
 #  Account Sid and Auth Token from twilio.com
 account_sid = 'AC3c6db669ecfa6a4b4c8a9b517be63439'
-auth_token = '61967aa755420ce628de93ed52610c2f'
+auth_token = '7d41a9e19c482c527200b67ca4516ece'
 
 client = Client(account_sid, auth_token)
 
