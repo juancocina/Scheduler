@@ -25,5 +25,12 @@ It is not present in this github repository.
 
 This file will handle storing the tasks and making the schedule, as well as sending the message to pythonsms.py
 to be delivered to the phone number. 
+## Note regarding this file: the following is pseudo code for a potential solution
+def searchDB():
+- search the database given a username
+- order the return by timestamps
+- make a list with all given informatio
+- for X in List:
+- create a new object, whos constructor takes time, a number, and task description
 
-
+The most difficult thing here might be creating the class that I can call on to create said object...
