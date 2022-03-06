@@ -12,8 +12,9 @@ from datetime import datetime
 import keys
 
 #  Account Sid and Auth Token from twilio.com
-account_sid = 'AC3c6db669ecfa6a4b4c8a9b517be63439'
-auth_token = '7d41a9e19c482c527200b67ca4516ece'
+account_sid = keys.accountSid()
+auth_token = keys.authToken()
+myNumber = keys.phone()
 
 client = Client(account_sid, auth_token)
 
@@ -26,7 +27,7 @@ client = Client(account_sid, auth_token)
 message = client.messages.create(
     from_='+16066378278',
     body='this is a test',
-    to='+13235097821'
+    to=myNumber
 )
 '''
 

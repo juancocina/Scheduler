@@ -18,7 +18,7 @@ https://pypi.org/project/smsframework/
 
 This file will handle sending the text messages to my phone, using Twilio and Hug API Framework
 
-NOTE: This file is not uploaded to protect my twilio authorization codes
+NOTE: I created a separate file called keys where pythonsms.py will retrieve my account, key, and phone number
 
 # scheduler.py
 
