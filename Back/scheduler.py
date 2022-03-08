@@ -1,11 +1,10 @@
 '''
     Juan Cocina 3/6/2022
-    This file is dedicated to creating a task class, and implemented in scheduler.py
-    Its purpose is to create task objects
+    This file is dedicated to calling tasks.py for user/task information, and sending
+    signals to pythonsms.py to send texts
 '''
 
 '''
-class Task:
-    def __init__(self, ):
-        self.
+    The question is still, how am i going to dynamically create jobs
 '''
+

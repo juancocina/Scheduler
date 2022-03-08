@@ -15,6 +15,8 @@ pip install sqlite-utils
 run database_setup.py (make sure to change paths to your requirements)
 pip install httpie
 
+# database_setup.py
+NOTE: I use paths for the .csv files + database file based on my machine. Your mileage may vary...
 # pythonsms.py
 https://pypi.org/project/smsframework/
 
@@ -35,6 +37,9 @@ def searchDB():
 - create a new object, whos constructor takes time, a number, and task description
 
 The most difficult thing here might be creating the class that I can call on to create said object...
+
+
+CURRENT STATUS: NEED TO FIX THE DELETE FUNCTION
 
 # scheduler.py
 This file will be responsible for creating the schedules and sending the signal to pythonsms.py to 

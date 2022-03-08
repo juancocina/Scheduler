@@ -8,7 +8,7 @@ import sqlite_utils
 import csv
 
 #  Connect to DB
-connection = sqlite3.connect('C:/Users/Juan C/Desktop/SWE Projects/Scheduler/var/scheduler.db')
+connection = sqlite3.connect('/Users/juancocina/Desktop/SWE Projects/Scheduler/var/scheduler.db')
 
 #  Creating a cursor object to execute
 #  SQL queries on a database table
@@ -26,7 +26,7 @@ create_table = '''CREATE TABLE IF NOT EXISTS users(
 cursor.execute(create_table)
 
 #  Opening the csv files
-file = open('C:/Users/Juan C/Desktop/SWE Projects/Scheduler/share/users.csv')
+file = open('/Users/juancocina/Desktop/SWE Projects/Scheduler/share/users.csv')
 
 #  Reading the contents of the
 #  person-records.csv file
@@ -61,18 +61,17 @@ connection.commit()
 
 #  Table Definition for tasks
 create_table = '''CREATE TABLE IF NOT EXISTS tasks(
-                username TEXT PRIMARY KEY,
+                id INTEGER PRIMARY KEY,
+                username TEXT,
                 task_description TEXT NOT NULL,
-                set_reminder DATETIME NOT NULL,
-                set_repeat TEXT NOT NULL,
-                i_o BOOLEAN NOT NULL);
+                time DATETIME NOT NULL);
                 '''
 
 #  Creating the table into the Database
 cursor.execute(create_table)
 
 #  Opening the csv files
-file = open('C:/Users/Juan C/Desktop/SWE Projects/Scheduler/share/tasks.csv')
+file = open('/Users/juancocina/Desktop/SWE Projects/Scheduler/share/tasks.csv')
 
 #  Reading the contents of the
 #  person-records.csv file
@@ -80,7 +79,7 @@ contents = csv.reader(file)
 
 #  SQL query to insert data into the
 #  person table
-insert_records = "INSERT INTO tasks (username, task_description, set_reminder, set_repeat, i_o) VALUES(?, ?, ?, ?, ?)"
+insert_records = "INSERT INTO tasks (id, username, task_description, time) VALUES(?, ?, ?, ?)"
 
 #  Importing the contents of the file
 #  into our person table

@@ -22,9 +22,6 @@ def sqlite(section="sqlite", key="dbfile", **kwargs):
 #
 #  Route
 #
-@hug.get('/')
-def landing():
-    return {"Status Code": "200", "Message": "Scheduler API is up and running!"}
 
 #
 #  GET USERS
@@ -75,26 +72,25 @@ def addTask(
         response,
         username: hug.types.text,
         task_description: hug.types.text,
-        set_reminder: hug.types.text,
-        set_repeat: hug.types.text,
-        i_o: hug.types.boolean,
+        time: hug.types.text,
         db: sqlite,
 ):
+
     tasks = db["tasks"]
-    set_reminder = datetime.strptime(set_reminder, '%b %d %Y %I:%M%p')
-    print(set_reminder)
+    time = datetime.strptime(time, '%b %d %Y %I:%M%p')
+    print(time)
     task_description = task_description.replace("%20", " ")
 
     task = {
         "username": username,
         "task_description": task_description,
-        "set_reminder": set_reminder,
-        "set_repeat": set_repeat,
-        "i_o": i_o
+        "time": time,
     }
 
     try:
         tasks.insert(task)
+        task["id"] = tasks.last_pk
+        print(tasks.last_pk)
     except Exception as e:
         response.status = hug.falcon.HTTP_409
         return {"Error": str(e)}
@@ -106,7 +102,33 @@ def addTask(
 #
 #  retrieves all tasks ordered by time inserted
 #
+@hug.get('/retrieveAllTasks/')
+def retrieveAllTasks(request, db: sqlite):
+    tasks = db["tasks"]
+
+    # order return by ascending time
+    return {"tasks": db["tasks"].rows_where(order_by="time asc")}
+
+#
+#   retrieves tasks given a specific username
+#
+@hug.get('/retrieveByUser/{username}')
+def retrieveyByUser(db: sqlite, username: hug.types.text):
+
+    tasks = []
+    for column in db.query('SELECT * FROM tasks WHERE username= ?', [username]):
+        tasks.append(column)
+    if not tasks:
+        return {"Status Code": "404", "Message": "User could not be found"}
+    else:
+        return {"Tasks": tasks}
 
 #
 #   deleted task
 #
+@hug.delete('/deleteTask/{id}')
+def deleteTask(db: sqlite, id: hug.types.text):
+    db.query('DELETE FROM tasks WHERE id= ?', id)
+
+    return {"id": id}
+
