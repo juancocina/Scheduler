@@ -116,7 +116,7 @@ def retrieveAllTasks(request, db: sqlite):
 def retrieveyByUser(db: sqlite, username: hug.types.text):
 
     tasks = []
-    for column in db.query('SELECT * FROM tasks WHERE username= ?', [username]):
+    for column in db.query('SELECT * FROM tasks WHERE username= ? ORDER BY time asc', [username]):
         tasks.append(column)
     if not tasks:
         return {"Status Code": "404", "Message": "User could not be found"}
@@ -124,11 +124,18 @@ def retrieveyByUser(db: sqlite, username: hug.types.text):
         return {"Tasks": tasks}
 
 #
-#   deleted task
-#
+#   delete task
+#   https://github.com/simonw/sqlite-utils/blob/19073d6d972fad9d68dd74c28544cd29083f1c12/docs/python-api.rst#deleting-a-specific-record
+#   CREDITS TO ^
+
 @hug.delete('/deleteTask/{id}')
 def deleteTask(db: sqlite, id: hug.types.text):
-    db.query('DELETE FROM tasks WHERE id= ?', id)
+    tasks = db["tasks"]
+    
+    if tasks.delete([id]):
+        return {"Status Code": "200", "Message": "Successfuly Deleted"}
+    else:
+        return {"Status Code": "500", "Message": "Server Error Occured"}
 
-    return {"id": id}
+    
 
