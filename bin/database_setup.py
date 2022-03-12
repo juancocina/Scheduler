@@ -64,7 +64,9 @@ create_table = '''CREATE TABLE IF NOT EXISTS tasks(
                 id INTEGER PRIMARY KEY,
                 username TEXT,
                 task_description TEXT NOT NULL,
-                time DATETIME NOT NULL);
+                date DATETIME NOT NULL,
+                time DATETIME NOT NULL,
+                phone_number TEXT NOT NULL);
                 '''
 
 #  Creating the table into the Database
@@ -79,7 +81,7 @@ contents = csv.reader(file)
 
 #  SQL query to insert data into the
 #  person table
-insert_records = "INSERT INTO tasks (id, username, task_description, time) VALUES(?, ?, ?, ?)"
+insert_records = "INSERT INTO tasks (id, username, task_description, date, time, phone_number) VALUES(?, ?, ?, ?, ?, ?)"
 
 #  Importing the contents of the file
 #  into our person table
