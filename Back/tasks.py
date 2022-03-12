@@ -20,13 +20,8 @@ def sqlite(section="sqlite", key="dbfile", **kwargs):
     return sqlite_utils.Database(dbfile)
 
 #
-#  Route
-#
-
-#
 #  GET USERS
 #
-# Route
 @hug.get("/users/")
 def users(db: sqlite):
     return {"users": db["users"].rows}
@@ -61,10 +56,6 @@ def addUser(
     return user
 
 #
-#  Deleting a user from the database
-#           .. since i'm basically the only one using this... not implementing
-
-#
 #  add Task
 #
 @hug.post('/addTask/', status=hug.falcon.HTTP_201)
@@ -72,19 +63,33 @@ def addTask(
         response,
         username: hug.types.text,
         task_description: hug.types.text,
+        date: hug.types.text,
         time: hug.types.text,
         db: sqlite,
 ):
 
     tasks = db["tasks"]
-    time = datetime.strptime(time, '%b %d %Y %I:%M%p')
-    print(time)
+    time = datetime.strptime(time, '%I:%M%p')
     task_description = task_description.replace("%20", " ")
+
+    # get the respective phone number
+    users = db["users"]
+    try:  #  check if username exists in the DB
+        users.get(username)
+    except Exception as e:
+        response.status = hug.falcon.HTTP_404
+        return {"Error": str(e)}
+    # it does, therefore assign the number
+    for column in db.query('SELECT phone_number from users WHERE username= ?', [username]):
+        phone_number = column['phone_number']
+    
 
     task = {
         "username": username,
         "task_description": task_description,
         "time": time,
+        "date": date,
+        "phone_number": phone_number
     }
 
     try:
@@ -136,6 +141,3 @@ def deleteTask(db: sqlite, id: hug.types.text):
         return {"Status Code": "200", "Message": "Successfuly Deleted"}
     else:
         return {"Status Code": "500", "Message": "Server Error Occured"}
-
-    
-
