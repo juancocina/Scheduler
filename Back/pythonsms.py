@@ -43,7 +43,7 @@ def landing():
 #  Sending a message function
 #
 @hug.post('/sendMessage')
-def send(request, phone_number, task_description):
+def send(request, id: hug.types.text, phone_number: hug.types.number, task_description: hug.types.text):
     phone_number = request.params.get("phone_number")
     task_description = request.params.get("task_description")
 
@@ -54,6 +54,11 @@ def send(request, phone_number, task_description):
     )
 
     if(message.sid):
+        #  Going to have to come back and test this line when the time comes
+        #  (Its supposed to delete tasks from the DB)
+        response = requests.post(f'http://localhost:8000/deleteTask/', data={id})
+        
+        # send a message to tasks.py to delete the task that was just sent out
         return {"Status:": str(message.sid)}
     else:
         return {"Error": "Message Could Not be Sent"}
