@@ -60,7 +60,20 @@ The most difficult thing here might be creating the class that I can call on to 
 
 
 # Potential Work
-- Change the database again, to include day and time as two seperate entities
-- Figure out how to parse the incoming json form tasks.py
-- Going to have to retrieve the users phone number as well. This just inludes another call to tasks.py to retrieve the phone number. There might be difficulty connecting the number with the task. Which makes me wonder if its just easier to include the phone number in the task insertion. This kind of jumbles with my current functions. I'll save that for later
-- Once messages are sent out, the object needs to be deleted.
+- Figure out how to parse the incoming json form tasks.py (pushing back for another time)
+
+
+- Once messages are sent out, the object need to be deleted (This is set up, needs to be tested).
+- Since the entry will be ignored if the date and time are not aligned with the time to send the message. I can still plan ahead weeks in advanced without using scheduler.py
+
+- How am i going to send the payload over with just the task's id, number, and description?
+
+## MAJOR UPDATE
+I don't think I need to use the task object created in scheduler.py
+I can just scan the DB, if the date and time is right, then send the message out, and have pythonsms.py
+send the text + the signal to delete from the DB
+
+if not, then just kinda ignore the DB entry.
+This way, i don't have to create an extra table for scheduled tasks + it minimizes the work in scheduler.py
+
+- Just gotta figure out how to parse the json and then send the payload over to pythonsms.py and the backend should be pretty much done...
