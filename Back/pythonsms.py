@@ -56,7 +56,7 @@ def send(request, id: hug.types.text, phone_number: hug.types.number, task_descr
     if(message.sid):
         #  Going to have to come back and test this line when the time comes
         #  (Its supposed to delete tasks from the DB)
-        response = requests.post(f'http://localhost:8000/deleteTask/', data={id})
+        response = requests.delete(f'http://localhost:8000/deleteTask/', data={id})
         
         # send a message to tasks.py to delete the task that was just sent out
         return {"Status:": str(message.sid)}
