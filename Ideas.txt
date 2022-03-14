@@ -160,6 +160,60 @@ SUCCESSFULLY ADDED TO TASK TABLE
 
 ======
 
+Update March 10, 2022, approximately 10:13pm
+
+I'm not sure that i need the scheduler library to even send texts.
+That library is programmed to start 'jobs', or FUNCTIONS
+I can use it to scan the DB, a job that I can schedule once a day,
+and i can use it to scan the tasks that get retrieved from the DB, which can be scheduled once a minute.
+
+From there, the tasks that are scheduled for that day/hour, i'll get be good to send them over to pythonsms.py
+
+If not, then don't worry about it.
+
+===
+		UPDATE MARCH 13, approximately 8pm.
+		Saving this here just incase I end up needing it again
+		
+#
+#   Class Task dedicated to creating objects called tasks
+#
+class Task:
+    def __init__(self, task_id, phone_number, task_description, date, time):
+        self.id = task_id
+        self.number = phone_number
+        self.task_desc = task_description
+        self.date = date
+        self.time = time
+
+        # parse the date into an English day of the week
+        y, m, d = (int(x) for x in date.split('-'))  
+        day = datetime.date(y, m, d)
+        self.day = day.strftime("%A")
+        
+        # Assign schedule based on the result
+        '''
+        if self.day == 'Monday':
+            self.schedule = schedule.every().monday.at(self.time).do(sendOut(self))
+        elif self.day == 'Tuesday':
+            self.schedule = schedule.every().tuesday.at(self.time).do(sendOut(self))
+        elif self.day == 'Wednesday':
+            self.schedule = schedule.every().wednesday.at(self.time).do(sendOut(self))
+        elif self.day == 'Thursday':
+            self.schedule = schedule.every().thursday.at(self.time).do(sendOut(self))
+        elif self.day == 'Friday':
+            self.schedule = schedule.every().friday.at(self.time).do(sendOut(self))
+        elif self.day == 'Saturday':
+            self.schedule = schedule.every().saturday.at(self.time).do(sendOut(self))
+        elif self.day == 'Sunday':
+            self.schedule = schedule.every().sunday.at(self.time).do(sendOut(self))
+        '''
+#
+#   End of Task class
+#
+
+===
+
 
 
 
