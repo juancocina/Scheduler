@@ -69,7 +69,7 @@ def addTask(
 ):
 
     tasks = db["tasks"]
-    time = datetime.strptime(time, '%I:%M%p')
+    # time = datetime.strptime(time, '%I:%M%p')
     task_description = task_description.replace("%20", " ")
 
     # get the respective phone number
@@ -108,8 +108,7 @@ def addTask(
 #  retrieves all tasks ordered by time inserted
 #
 @hug.get('/retrieveAllTasks/')
-def retrieveAllTasks(request, db: sqlite):
-    tasks = db["tasks"]
+def retrieveAllTasks(db: sqlite):
 
     # order return by ascending time
     return {"tasks": db["tasks"].rows_where(order_by="time asc")}
