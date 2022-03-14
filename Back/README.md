@@ -10,10 +10,10 @@ notifications to my phone, reminding me to accomplish tasks and keep myself on t
 - HTTPIE
 - sqlite_utils
 - DB Browser for sqlite
-
-run database_setup.py (make sure to change paths to your requirements)
+- Anything else that i might've forgotten could be found in each .py file
 # database_setup.py
-NOTE: I use paths for the .csv files + database file based on my machine. Your mileage may vary...
+- run Database_setup.py
+NOTE: I use my paths for the .csv files + database file based on my machine. Your mileage may vary...
 # pythonsms.py
 https://pypi.org/project/smsframework/
 https://docs.python.org/3/library/time.html#time.sleep
@@ -69,11 +69,5 @@ The most difficult thing here might be creating the class that I can call on to 
 - How am i going to send the payload over with just the task's id, number, and description?
 
 ## MAJOR UPDATE
-I don't think I need to use the task object created in scheduler.py
-I can just scan the DB, if the date and time is right, then send the message out, and have pythonsms.py
-send the text + the signal to delete from the DB
-
-if not, then just kinda ignore the DB entry.
-This way, i don't have to create an extra table for scheduled tasks + it minimizes the work in scheduler.py
-
-- Just gotta figure out how to parse the json and then send the payload over to pythonsms.py and the backend should be pretty much done...
+- Back end is practically done.
+- Any further testing will be have to be done once the front is done
