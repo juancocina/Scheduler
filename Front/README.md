@@ -3,3 +3,6 @@
 - Maybe bootstrap
 - Last resort is to code everything from scratch, which is easy, but not necessarily a challenge. And not fast either.
 
+# React Requirements
+- Node.js
+- 
