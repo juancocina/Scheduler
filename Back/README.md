@@ -60,13 +60,8 @@ The most difficult thing here might be creating the class that I can call on to 
 
 
 # Potential Work
-- Figure out how to parse the incoming json form tasks.py (pushing back for another time)
-
-
-- Once messages are sent out, the object need to be deleted (This is set up, needs to be tested).
-- Since the entry will be ignored if the date and time are not aligned with the time to send the message. I can still plan ahead weeks in advanced without using scheduler.py
-
-- How am i going to send the payload over with just the task's id, number, and description?
+- Come back into tasks.py and add a endpoint that allows me to retrieve a list of tasks based on a username
+- So that users only see their own tasks and cannot access others
 
 ## MAJOR UPDATE
 - Back end is practically done.
